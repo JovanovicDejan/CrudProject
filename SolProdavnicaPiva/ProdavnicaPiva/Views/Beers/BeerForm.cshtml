@@ -1,0 +1,25 @@
+﻿@model ProdavnicaPiva.ViewModels.BeerViewModel
+@{
+    ViewBag.Title = "BeerForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Beer info</h2>
+@using (Html.BeginForm("Save", "Beers"))
+{
+    <div class="form-group">
+        @Html.LabelFor(d => d.Beer.Brand.Name)
+        @Html.DropDownListFor(b => b.Beer.BrandId, new SelectList(Model.Brands, "Id", "Name"), "Select Brand", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(d => d.Beer.Distributor.Name)
+        @Html.DropDownListFor(d => d.Beer.DistributorId, new SelectList(Model.Distributors, "Id", "Name"), "Select Distributor", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(d => d.Beer.Manufacturer.Name)
+        @Html.DropDownListFor(b => b.Beer.ManufacturerId, new SelectList(Model.Manufacturers, "Id", "Name"), "Select Manufacturer", new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(b => b.Beer.Id)
+
+    <button type="submit" class="btn btn-primary" >Save</button>
+}

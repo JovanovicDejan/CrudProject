@@ -1,0 +1,71 @@
+﻿@model IEnumerable<ProdavnicaPiva.Models.Beer> 
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Beers</h2>
+
+<p>
+    @Html.ActionLink("New Beer", "New", "Beers", null, new {@class = "btn btn-primary"})
+</p>
+
+@if (!Model.Any())
+{
+    <p>We don't have any Beer yet</p>
+}
+else
+{
+
+    <table id="beer" class="table table-border">
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Distributor</th>
+                <th>Manufacturer</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var beers in Model)
+                {
+                    <tr>
+                        <td>@beers.Brand.Name</td>
+                        <td>@beers.Distributor.Name</td>
+                        <td>@beers.Manufacturer.Name</td>
+                        <td>@Html.ActionLink("Update", "Edit", "Beers", new {id = beers.Id}, new {@class = "btn btn-success"})</td>
+                        <td>
+                            <button data-beer-id="@beers.Id" class="btn btn-danger js-delete">Delete</button>
+                        </td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+}
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#beer .js-delete").on("click", function () {
+                var button = $(this);
+
+                if (confirm("Are you sure a about deleting this beer?")) {
+                    $.ajax({
+                        url: "/api/beers/" + button.attr("data-beer-id"),
+                        method: "DELETE",
+                        success: function () {
+                            button.parents("tr").remove();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+
