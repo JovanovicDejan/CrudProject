@@ -9,5 +9,7 @@ namespace ProdavnicaPiva.Models
         [Display(Name = "Manufacture")]
         public string Name { get; set; }
 
+        [Required]
+        public int PIB { get; set; }
     }
 }

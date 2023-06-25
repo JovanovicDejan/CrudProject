@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProdavnicaPiva.Models
 {
@@ -8,6 +9,8 @@ namespace ProdavnicaPiva.Models
         [Required]
         [Display(Name = "Brand")]
         public string Name { get; set; }
-
+        [Required]
+        [Display(Name = "Date made")]
+        public DateTime DateMade { get; set; }
     }
 }

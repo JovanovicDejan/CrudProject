@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ProdavnicaPiva.Models.Manufacturer>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manufacturer</h2>
+
+<p>
+    @Html.ActionLink("Add new Brand", "New", "Manufacturers")
+</p>
+
+<table id="manufacturer" class="table table-border w-100">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date made</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var manufacturer in Model)
+        {
+            <tr>
+                <td>@manufacturer.Name</td>
+
+                <td>@manufacturer.PIB</td>
+                <td>@Html.ActionLink("Update", "Edit", "Manufacturers", new { id = manufacturer.Id }, new { @class = "btn btn-success" })</td>
+                <td>
+                    <button data-manufacturer-id="@manufacturer.Id" class="btn btn-danger js-delete">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $("#manufacturer").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                if (confirm("Are you sure a about deleting this manufacturer?")) {
+                    $.ajax({
+                        url: "/api/manufacturers/" + button.attr("data-manufacturer-id"),
+                        method: "DELETE",
+                        success: function () {
+                            button.parents("tr").remove();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

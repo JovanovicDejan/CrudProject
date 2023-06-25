@@ -120,3 +120,6 @@ C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\bin\AutoMap
 C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\bin\System.Net.Http.Formatting.xml
 C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\bin\System.Web.Http.xml
 C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\bin\System.Web.Http.WebHost.xml
+C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\obj\Debug\ProdavnicaPiva.Migrations.AddCountryToDistributor.resources
+C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\obj\Debug\ProdavnicaPiva.Migrations.AddDateMadeToBrand.resources
+C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\obj\Debug\ProdavnicaPiva.Migrations.AddPIBToManufacturer.resources

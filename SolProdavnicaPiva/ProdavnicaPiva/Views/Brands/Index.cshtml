@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ProdavnicaPiva.Models.Brand>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Brands</h2>
+
+<p>
+    @Html.ActionLink("Add new Brand", "New", "Brands")
+</p>
+
+<table id="brand" class="table table-border w-100">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date made</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var brands in Model)
+        {
+            <tr>
+                <td>@brands.Name</td>
+
+                <td>@brands.DateMade.Date.ToShortDateString()</td>
+                <td>@Html.ActionLink("Update", "Edit", "Brands", new { id = brands.Id }, new { @class = "btn btn-success" })</td>
+                <td>
+                    <button data-brand-id="@brands.Id" class="btn btn-danger js-delete">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $("#brand").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                if (confirm("Are you sure a about deleting this brand?")) {
+                    $.ajax({
+                        url: "/api/brands/" + button.attr("data-brand-id"),
+                        method: "DELETE",
+                        success: function () {
+                            button.parents("tr").remove();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

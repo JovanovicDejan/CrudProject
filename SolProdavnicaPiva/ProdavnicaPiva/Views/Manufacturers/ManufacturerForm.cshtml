@@ -1,0 +1,23 @@
+﻿@model ProdavnicaPiva.ViewModels.ManufacturerViewModel
+@{
+    ViewBag.Title = "DistributorForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manufacturer Form</h2>
+
+@using (Html.BeginForm("Save", "Manufacturers"))
+{
+    @Html.ValidationSummary(true, "Fix the following errors!")
+    <div class="form-group">
+        @Html.LabelFor(b => b.Manufacturer.Name)
+        @Html.TextBoxFor(b => b.Manufacturer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(b => b.Manufacturer.Name, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(b => b.Manufacturer.PIB)
+        @Html.TextBoxFor(b => b.Manufacturer.PIB, new { @class = "form-control" })
+        @Html.ValidationMessageFor(d => d.Manufacturer.PIB, null, new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
