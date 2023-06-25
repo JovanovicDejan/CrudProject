@@ -51,7 +51,8 @@ else
 {
     <script>
         $(document).ready(function () {
-            $("#beer .js-delete").on("click", function () {
+
+            $("#beer").on("click", ".js-delete", function () {
                 var button = $(this);
 
                 if (confirm("Are you sure a about deleting this beer?")) {

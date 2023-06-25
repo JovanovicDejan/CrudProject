@@ -52,6 +52,7 @@ namespace ProdavnicaPiva.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Beer beer)
         {
 
@@ -78,7 +79,6 @@ namespace ProdavnicaPiva.Controllers
                 beerInDb.DistributorId = beer.DistributorId;
                 beerInDb.ManufacturerId = beer.ManufacturerId;
             }
-
             _context.SaveChanges();
             return RedirectToAction("Index", "Beers");
         }
