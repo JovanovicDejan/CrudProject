@@ -5,6 +5,8 @@ using System.Web.Mvc;
 
 namespace ProdavnicaPiva.Controllers
 {
+    [Authorize(Roles = RoleName.CanManageAny)]
+
     public class BrandsController : Controller
     {
         private ApplicationDbContext _context;
@@ -14,13 +16,21 @@ namespace ProdavnicaPiva.Controllers
             _context = new ApplicationDbContext();
         }
         // GET: Brands
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var brands = _context.Brands.ToList();
             if (brands == null)
                 return HttpNotFound();
 
-            return View(brands);
+            if (User.IsInRole(RoleName.CanManageBrands) || User.IsInRole(RoleName.CanManageBeer))
+            {
+                return View(brands);
+            }
+            else
+            {
+                return View("ReadOnlyList", brands);
+            }
         }
 
         [HttpPost]
@@ -31,6 +41,7 @@ namespace ProdavnicaPiva.Controllers
                 var brandViewModel = new BrandViewModel { Brand = brand };
                 return View("BrandForm", brandViewModel);
             }
+            int id = brand.Id;
             if (brand.Id == 0)
             {
                 _context.Brands.Add(brand);
@@ -44,6 +55,7 @@ namespace ProdavnicaPiva.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Brands");
         }
+
 
         public ActionResult New()
         {

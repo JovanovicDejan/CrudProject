@@ -19,5 +19,7 @@
         @Html.TextBoxFor(b => b.Manufacturer.PIB, new { @class = "form-control" })
         @Html.ValidationMessageFor(d => d.Manufacturer.PIB, null, new { @class = "text-danger" })
     </div>
+    @Html.HiddenFor(b => b.Manufacturer.Id)
     <button type="submit" class="btn btn-primary">Save</button>
+
 }

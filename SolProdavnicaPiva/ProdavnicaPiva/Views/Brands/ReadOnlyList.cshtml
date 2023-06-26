@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ProdavnicaPiva.Models.Brand>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Brands</h2>
+
+<table id="brand" class="table table-border w-100">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date made</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var brands in Model)
+        {
+            <tr>
+                <td>@brands.Name</td>
+
+                <td>@brands.DateMade.Date.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

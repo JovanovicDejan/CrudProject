@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 namespace ProdavnicaPiva.Controllers
 {
+    [Authorize(Roles = RoleName.CanManageBrands)]
     public class DistributorsController : Controller
     {
         // GET: Distributor
@@ -15,13 +16,17 @@ namespace ProdavnicaPiva.Controllers
             _context = new ApplicationDbContext();
         }
         // GET: Brands
+        [AllowAnonymous]
+
         public ActionResult Index()
         {
             var distributor = _context.Distributors.ToList();
             if (distributor == null)
                 return HttpNotFound();
 
-            return View(distributor);
+            if (User.IsInRole(RoleName.CanManageBrands))
+                return View(distributor);
+            return View("ReadOnlyList", distributor);
         }
 
         [HttpPost]

@@ -9,7 +9,7 @@
 <h2>Beers</h2>
 
 <p>
-    @Html.ActionLink("New Beer", "New", "Beers", null, new {@class = "btn btn-primary"})
+    @Html.ActionLink("New Beer", "New", "Beers", null, new {@class = "btn btn-info" })
 </p>
 
 @if (!Model.Any())
@@ -22,9 +22,15 @@ else
     <table id="beer" class="table table-border">
         <thead>
             <tr>
-                <th>Brand</th>
-                <th>Distributor</th>
-                <th>Manufacturer</th>
+                <th>
+                    @Html.ActionLink("Brands", "Index", "Brands", new { area = "" }, new { @class = "nav-link" })
+                </th>
+                <th>
+                    @Html.ActionLink("Distributors", "Index", "Distributors", new { area = "" }, new { @class = "nav-link" })
+                </th>
+                <th>
+                    @Html.ActionLink("Manufacturers", "Index", "Manufacturers", new { area = "" }, new { @class = "nav-link" })
+                </th>
                 <th>Delete</th>
                 <th>Update</th>
             </tr>

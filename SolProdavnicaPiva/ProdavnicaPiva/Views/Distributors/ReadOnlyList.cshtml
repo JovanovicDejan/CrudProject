@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ProdavnicaPiva.Models.Distributor>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Distributor</h2>
+
+
+<table id="distributor" class="table table-border w-100">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date made</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var distributor in Model)
+        {
+            <tr>
+                <td>@distributor.Name</td>
+
+                <td>@distributor.Country</td>
+            </tr>
+        }
+    </tbody>
+</table>

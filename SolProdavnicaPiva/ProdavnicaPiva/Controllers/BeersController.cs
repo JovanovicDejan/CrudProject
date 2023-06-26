@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ProdavnicaPiva.Controllers
 {
+    [Authorize]
     public class BeersController : Controller
     {
         private ApplicationDbContext _context;
@@ -21,17 +22,24 @@ namespace ProdavnicaPiva.Controllers
         }
 
         // GET: Beers
+        [AllowAnonymous]
         public ActionResult Index()
         {
-
             var beers = _context.Beers.Include(b => b.Brand).Include(d => d.Distributor).Include(m => m.Manufacturer).ToList();
-            if (beers == null)
-                return HttpNotFound();
+            if (User.IsInRole(RoleName.CanManageBrands))
+            {
+                if (beers == null)
+                    return HttpNotFound();
 
-            return View(beers);
-
+                return View(beers);
+            }
+            else
+            {
+                return View("ReadOnlyList", beers);
+            }
         }
 
+        [Authorize]
         // GET: Beer
         public ActionResult Edit(int id)
         {
@@ -53,6 +61,7 @@ namespace ProdavnicaPiva.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Save(Beer beer)
         {
 
@@ -67,6 +76,7 @@ namespace ProdavnicaPiva.Controllers
                 };
                 return View("BeerForm", beerViewModel);
             }
+            int id = beer.Id;
             if (beer.Id == 0)
             {
                 _context.Beers.Add(beer);
@@ -82,7 +92,7 @@ namespace ProdavnicaPiva.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Beers");
         }
-
+        [Authorize(Roles = RoleName.CanManageBrands)]
         public ActionResult New()
         {
             var distributors = _context.Distributors.ToList();

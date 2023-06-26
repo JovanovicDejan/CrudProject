@@ -123,3 +123,5 @@ C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\bin\System.
 C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\obj\Debug\ProdavnicaPiva.Migrations.AddCountryToDistributor.resources
 C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\obj\Debug\ProdavnicaPiva.Migrations.AddDateMadeToBrand.resources
 C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\obj\Debug\ProdavnicaPiva.Migrations.AddPIBToManufacturer.resources
+C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\obj\Debug\ProdavnicaPiva.Migrations.SeedUsers.resources
+C:\Users\dejan\Desktop\Rvas project\SolProdavnicaPiva\ProdavnicaPiva\obj\Debug\ProdavnicaPiva.Migrations.SeedGuestUser.resources

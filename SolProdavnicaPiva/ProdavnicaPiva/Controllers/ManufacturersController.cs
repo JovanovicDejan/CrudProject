@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 namespace ProdavnicaPiva.Controllers
 {
+    [Authorize(Roles = RoleName.CanManageBrands)]
     public class ManufacturersController : Controller
     {
         // GET: Manufacturers
@@ -15,13 +16,17 @@ namespace ProdavnicaPiva.Controllers
             _context = new ApplicationDbContext();
         }
         // GET: Brands
+        [AllowAnonymous]
+
         public ActionResult Index()
         {
             var manufacturer = _context.Manufacturers.ToList();
             if (manufacturer == null)
                 return HttpNotFound();
 
-            return View(manufacturer);
+            if (User.IsInRole(RoleName.CanManageBrands))
+                return View(manufacturer);
+            return View("ReadOnlyList", manufacturer);
         }
 
         [HttpPost]
